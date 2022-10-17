@@ -23,6 +23,7 @@ public class UserDao {
         ps.executeUpdate();
         ps.close();
         conn.close();
+        System.out.println("DB insert 성공");
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
