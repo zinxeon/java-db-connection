@@ -16,11 +16,14 @@ public class UserDao {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
         PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
-        ps.setString(1, "1");
-        ps.setString(2, "jinseon");
+        ps.setString(1, "0");
+        ps.setString(2, "jixnseon");
         ps.setString(3, "1123");
 
-        ps.executeUpdate();
+
+        int status = ps.executeUpdate();
+        System.out.println(status);
+
         ps.close();
         conn.close();
         System.out.println("DB insert 성공");
