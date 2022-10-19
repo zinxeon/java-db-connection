@@ -13,15 +13,19 @@ public class UserDao {
         String dbPassword = env.get("DB_PASSWORD");
 
         Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // DB 접속 ( ex sql workbeanch실행)
         Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+        // Query문 작성
         PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id, name, password) VALUES(?, ?, ?)");
-        ps.setString(1, "11");
+        ps.setString(1, "2");
         ps.setString(2, "jinseon");
         ps.setString(3, "1123");
 
-        int status = ps.executeUpdate();
-        System.out.println(status);
+        // Query문 실행
+        ps.executeUpdate();
 
+        // 종료
         ps.close();
         conn.close();
         System.out.println("DB insert 성공");
@@ -34,9 +38,14 @@ public class UserDao {
         String dbPassword = env.get("DB_PASSWORD");
 
         Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // DB 접속 ( ex sql workbeanch실행)
         Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+        // Query문 작성
         PreparedStatement ps = conn.prepareStatement("SELECT id, name, password FROM users WHERE id = ?");
         ps.setString(1, id);
+
+        // Query문 실행
         ResultSet rs = ps.executeQuery();
         rs.next();
         User user = new User(rs.getString("id"),
@@ -50,7 +59,7 @@ public class UserDao {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         UserDao userDao = new UserDao();
         userDao.add();
-        User user = userDao.get("5");
+        User user = userDao.get("1");
         System.out.println(user.getName());
     }
 }
